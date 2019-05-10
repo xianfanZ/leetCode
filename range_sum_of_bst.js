@@ -14,8 +14,7 @@
  */
 
 
-var rangeSumBST = function(root, L, R) {
-//recursive implementation
+var rangeSumBST_recursion = function(root, L, R) {
     let sum = 0;
     if (root != null) {
         if(root.val >=L && root.val <= R) {
@@ -30,6 +29,27 @@ var rangeSumBST = function(root, L, R) {
     }
     else {
         return 0
+    }
+    return sum
+};
+
+var rangeSumBST_iteration = function(root, L, R) {
+    let sum = 0;
+    var stack = [];
+    stack.push(root);
+    while(stack && stack.length){
+        var node = stack.pop();
+        if(node != null) {
+            if(node.val >= L && node.val <=R){
+                sum += node.val
+            }
+            if(node.val < R){
+                stack.push(node.right)
+            }
+            if(node.val > L){
+                stack.push(node.left)
+            }
+        }
     }
     return sum
 };
